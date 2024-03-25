@@ -1,0 +1,2 @@
+protoc -I . -I $GOPATH/home/rhynes/projects/bomberman-dom/ --go_out=$GOPATH/home/rhynes/projects/bomberman-dom/game/proto/ message.proto
+protoc -I . --js_out=import_style=commonjs,binary:$GOPATH/home/rhynes/projects/bomberman-dom/static/proto/ message.proto

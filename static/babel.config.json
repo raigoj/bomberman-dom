@@ -1,0 +1,24 @@
+{
+    // "presets": [
+    //   [
+    //     "@babel/preset-react",
+    //     {
+  
+    //       "pragma": "Mframe.createElement", // default pragma is React.createElement (only in classic runtime)
+    //       "pragmaFrag": "Mframe.createTextElement", // default is React.Fragment (only in classic runtime)
+    //       "throwIfNamespace": true, // defaults to true
+    //       "runtime": "classic" // defaults to classic
+    //       // "importSource": "index" // defaults to react (only in automatic runtime)
+    //     }    
+    //   ]
+    // ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-react-jsx", {
+          "pragma": "Mframe.createElement", // default pragma is React.createElement
+          "throwIfNamespace": false // defaults to true
+        }
+      ]
+    ]
+  }
+  

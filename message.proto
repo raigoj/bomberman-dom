@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package Message_proto;
+import "google/protobuf/timestamp.proto";
+
+message ClientGameMessage {
+	int32 input_sequence_number = 1;
+	float time_elapsed = 2;
+	oneof message {
+		InitPlayer init_player_payload = 3;
+		MovePosition move_position_payload = 4;
+		Place place_payload = 5;
+		UpdatePlayer update_player_payload = 7;
+		SetPosition set_position_payload = 8;
+	}
+}
+
+enum Direction {
+	UP = 0;
+	DOWN = 1;
+	LEFT = 2;
+	RIGHT = 3;
+}
+
+message SetPosition {
+	int32 id = 1;
+	float x = 2;
+	float y = 3;
+}
+
+message MovePosition {
+	int32 id = 1;
+	float dx = 2;
+	float dy = 3;
+}
+
+message InitPlayer {
+	int32 id = 1;
+	int32 client_id = 2;
+	float x = 3;
+	float y = 4;
+	string name = 5;
+    int32 lives = 6;
+	bool is_main = 7;
+}
+
+message Map {
+	repeated int32 wall = 1;
+    repeated int32 breakable = 2;
+	int32 num_cols = 3;
+	int32 num_rows = 4;
+}
+
+message Break {
+    int32 id = 1;
+}
+
+message InitAll {
+	repeated InitPlayer init_player = 1;
+	Map init_map = 2;
+}
+
+message RemovePlayer {
+	int32 id = 1;
+}
+
+message RegisterClientID {
+	int32 client_id = 1;
+}
+
+message Place {
+	int64 id = 1;
+	int32 player_id = 2;
+	float x = 3;
+	float y = 4;
+	google.protobuf.Timestamp placed = 5;
+}
+
+message UpdatePlayer {
+	int32 id = 1;
+	float x = 2;
+	float y = 3;
+	float health = 4;
+	string name = 5;
+	bool is_destroy = 6;
+}
+
+message Player {
+	int32 id = 1;
+	float x = 2;
+	float y = 3;
+	int32 lives = 4;
+	int32 bombs = 5;
+	int32 speed = 6;
+	int32 blast = 7;
+    int32 placed = 8;
+	string name = 9;
+	bool is_destroy = 11;
+	int32 current_input_number = 12;
+}
+
+message ServerGameMessage {
+	int32 last_process_input = 1;
+	oneof message {
+		InitAll init_all_payload = 2;
+		InitPlayer init_player_payload = 3;
+		Player update_player_payload = 4;
+		Place init_place_payload = 5;
+		RemovePlayer remove_player_payload = 6;
+		RegisterClientID register_client_id_payload = 7;
+	}
+}
+
+message Bomb {
+	int32 player_id = 1;
+	int32 x = 2;
+	int32 y = 3;
+	google.protobuf.Timestamp next_reload = 4;
+}

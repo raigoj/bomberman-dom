@@ -1,0 +1,527 @@
+/* html {
+    overflow: hidden;
+}
+
+body {
+    min-height:100vh;
+    background:#333;
+    display:flex;
+    justify-content:safe center;
+    align-items:safe center;
+    flex-direction:column;
+    --scaling: 2;
+}
+
+#test {
+    position:relative;
+    box-sizing:content-box;
+    width:calc(751px * var(--scaling));
+    height:calc(408px * var(--scaling));
+    overflow:hidden;
+    outline:none;
+    flex-shrink:0
+   }
+
+#chat {
+    position:absolute;
+    left:calc(551px * var(--scaling));
+    top:0;
+    width:calc(200px * var(--scaling));
+    height:100%;
+    padding-left:0;
+    font-size:calc(10px * var(--scaling));
+    display:flex;
+    flex-direction:column;
+    border-left: 1px solid red;
+   }  
+#game {
+    width:calc(552px * var(--scaling));
+    height:100%;
+    padding:calc(9px * var(--scaling));
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    border-right: 1px solid red;
+}
+#log {
+    background: rgb(0, 0, 0);
+    color: red;
+    margin: 0;
+    padding: 2em 0.5em 0em 0.3em;
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    right: 0em;
+    bottom: 0em;
+    overflow: auto;
+}
+#inputbox {
+    margin: 0;
+    position: absolute;
+    bottom: 0em;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+}
+input{
+    outline: 0;
+    border: 0;
+    border-top: 1px solid rgb(255, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0);
+    color: red;
+}
+
+.users {
+    color: red;
+}
+
+input:focus {
+    outline:none!important;
+}
+
+.start {
+    width: calc(100px * var(--scaling));
+    height: calc(21px * var(--scaling));
+    color: red;
+    font-size: calc(10px * var(--scaling));
+    margin-top:calc(12px * var(--scaling))
+}
+
+.namebox {
+    margin:calc(2px * var(--scaling)) 0 0;
+    width:calc(95px * var(--scaling));
+    height:calc(12px * var(--scaling));
+    padding:calc(2px * var(--scaling));
+    font-size:calc(10px * var(--scaling));
+    border:calc(1px * var(--scaling)) solid red
+}
+
+.wall {
+	background-image: url("./sprites/wall.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+
+.breakable {
+	background-image: url("./sprites/breakable.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+
+.grass {
+    background-image: url("./sprites/grass.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+
+.blast {
+    background-image: url("./sprites/blast.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+
+.row {
+    display: flex;
+}
+
+.player{
+	background-color: greenyellow;
+	width: 50px;
+	height: 50px;
+	z-index: 2;
+	transform: transform;
+}
+
+.bomb{
+	background-color: blue;
+	width: 50px;
+	height: 50px;
+	z-index: 10;
+	color: aliceblue;
+	border-radius: 25px;
+}
+
+.powerFlames {
+	background-image: url("./sprites/blastpowerup.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+.powerBombsNum {
+	background-image: url("./sprites/bombpowerup.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+.powerSpeed {
+	background-image: url("./sprites/speedpowerup.png");
+	width: 50px;
+	height: 50px;
+	background-position: center; 
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+ */
+
+ * {
+    padding: 0;
+    margin: 0;
+  }
+  
+   html {
+      overflow: hidden;
+    }
+    
+    /*body {
+      min-height: 100vh;
+      background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      --scaling: 2;
+    }*/
+  
+    #app {
+      --scaling: 2;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: safe center;
+      align-items: safe center;
+      background-image: url("./sprites/background2.png");
+      background-repeat: no-repeat;
+  }
+    
+    /*#test {
+      position: relative;
+      box-sizing: content-box;
+      width: calc(751px * var(--scaling));
+      height: calc(408px * var(--scaling));
+      overflow: hidden;
+      outline: none;
+      flex-shrink: 0;
+    }*/
+  
+    #test {
+      position: relative;
+      box-sizing: content-box;
+      width: calc(751px * var(--scaling));
+      height: calc(408px * var(--scaling));
+      overflow: hidden;
+      outline: none;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      border: 40px solid;
+      border-image-source: url("./sprites/frame.png");
+      border-image-slice: 60;
+  }
+    
+    /*#chat {
+      position: absolute;
+      left: calc(551px * var(--scaling));
+      top: 0;
+      width: calc(200px * var(--scaling));
+      height: 100%;
+      padding-left: 0;
+      font-size: calc(10px * var(--scaling));
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid red;
+    }*/
+  
+    #chat {
+      position: absolute;
+      left: calc(551px * var(--scaling));
+      top: 0;
+      width: calc(200px * var(--scaling));
+      height: 100%;
+      font-size: calc(10px * var(--scaling));
+      display: flex;
+      flex-direction: column;
+      border: solid transparent;
+      border-width: 10px;
+      border-image-source: url("./sprites/border\(2\).png");
+      border-right: none;
+      border-top: none;
+      border-bottom: none;
+      border-image-slice: 50;
+  }
+    
+    /*#game {
+      width: calc(552px * var(--scaling));
+      height: 100%;
+      padding: calc(9px * var(--scaling));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      border-right: 1px solid red;
+    }*/
+  
+    #game {
+      width: calc(552px * var(--scaling));
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      border-right: 1px solid red;
+  }
+    
+   /* #log {
+      background: rgb(0, 0, 0);
+      color: red;
+      margin: 0;
+      padding: 2em 0.5em 0em 0.3em;
+      position: absolute;
+      top: 0em;
+      left: 0em;
+      right: 0em;
+      bottom: 0em;
+      overflow: auto;
+    }*/
+  
+    #log {
+      background: rgb(0, 0, 0);
+      color: red;
+      margin: 0;
+      position: absolute;
+      top: 0em;
+      left: 0em;
+      right: 0em;
+      bottom: 0em;
+      overflow: auto;
+  }
+    
+    /*#inputbox {
+      margin: 0;
+      position: absolute;
+      bottom: 0em;
+      left: 0px;
+      width: 100%;
+      overflow: hidden;
+    }*/
+  
+    #inputbox {
+      padding: 5px;
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 0em;
+      left: 0px;
+      width: 100%;
+      height: 40px;
+      overflow: hidden;
+  }
+    
+    input {
+      outline: 0;
+      border: 0;
+      border-top: 1px solid rgba(255, 0, 0, 0.5);
+      background-color: rgb(0, 0, 0);
+      color: red;
+    }
+    
+    .users {
+      color: red;
+    }
+    
+    input:focus {
+      outline: none !important;
+    }
+    
+    /*.start {
+      width: calc(100px * var(--scaling));
+      height: calc(21px * var(--scaling));
+      color: red;
+      font-size: calc(10px * var(--scaling));
+      margin-top: calc(12px * var(--scaling));
+    }*/
+  
+    .start {
+      background-color: transparent;
+      border: none;
+      background-image: url("./sprites/woodpiece.png");
+      background-size: cover;
+      width: calc(110px * var(--scaling));
+      height: calc(21px * var(--scaling));
+      color: white;
+      font-size: calc(10px * var(--scaling));
+      margin-top: calc(12px * var(--scaling));
+      opacity: 0.8;
+  }
+  
+  .start:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+    
+    /*.namebox {
+      margin: calc(2px * var(--scaling)) 0 0;
+      width: calc(95px * var(--scaling));
+      height: calc(12px * var(--scaling));
+      padding: calc(2px * var(--scaling));
+      font-size: calc(10px * var(--scaling));
+      border: calc(1px * var(--scaling)) solid red;
+    }*/
+    
+    .namebox {
+      background-color: transparent;
+      border: none;
+      background-image: url("./sprites/woodpiece2.png");
+      background-size: 500px 50px;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      margin: calc(2px * var(--scaling)) 0 0;
+      width: calc(90px * var(--scaling));
+      height: calc(12px * var(--scaling));
+      padding: calc(2px * var(--scaling));
+      font-size: calc(10px * var(--scaling));
+      border-radius: 10px;
+      ;
+  }
+  
+    .wall {
+      background-image: url("./sprites/wall.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .breakable {
+      background-image: url("./sprites/breakable.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .grass {
+      background-image: url("./sprites/grass.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .blast {
+      background-image: url("./sprites/blast.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .row {
+      display: flex;
+    }
+    
+    .player {
+      background-color: greenyellow;
+      width: 50px;
+      height: 50px;
+      z-index: 2;
+      transform: transform;
+    }
+    
+    .bomb {
+      background-color: blue;
+      width: 50px;
+      height: 50px;
+      z-index: 10;
+      color: aliceblue;
+      border-radius: 25px;
+    }
+    
+    .powerFlames {
+      background-image: url("./sprites/blastpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .powerBombsNum {
+      background-image: url("./sprites/bombpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .powerSpeed {
+      background-image: url("./sprites/speedpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .blastpowerup{
+      background-image:url("./sprites/blastpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+    }
+  
+    .bombpowerup{
+      background-image:url("./sprites/bombpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+    }
+  
+    .speedpowerup {
+      background-image:url("./sprites/speedpowerup.png");
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+    }
+  
+    .userpic {
+      background-image: url("./sprites/bomber.png");
+      height:50px;
+      width:50px;
+      background-position:0px -100px;
+      background-size:250px 250px;
+      
+      border:1px solid;
+  }
+  
+  .flexime {
+    display: flex;
+  }
+  
+  .playerList {
+    width: 200px;
+    background-color: red;
+  }
